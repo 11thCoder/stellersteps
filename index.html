@@ -147,16 +147,85 @@
 
 .hero-visual{
     position:relative;
-    height:580px;
+    height:640px;
     display:flex;
     justify-content:center;
     align-items:center;
 }
 
-#quantumCanvas{
+.orbit-stage{
+    position:relative;
     width:100%;
     height:100%;
-    display:block;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.orbit-glow{
+    position:absolute;
+    width:640px;
+    height:640px;
+    border-radius:50%;
+    background:radial-gradient(circle, rgba(244,211,94,.26) 0%, rgba(244,211,94,.1) 34%, transparent 70%);
+    filter:blur(34px);
+    animation:coreBreath 6s ease-in-out infinite;
+    pointer-events:none;
+    z-index:0;
+}
+
+.orbit-svg{
+    position:relative;
+    width:580px;
+    height:580px;
+    overflow:visible;
+    z-index:1;
+}
+
+.orbit-ring{
+    fill:none;
+    stroke:url(#ringGradient);
+    stroke-width:2.6;
+    filter:drop-shadow(0 0 6px rgba(244,211,94,.35));
+}
+
+.orbit-ring.is-mid{ stroke:url(#ringGradientMid); stroke-width:2.3; }
+.orbit-ring.is-faint{ stroke:url(#ringGradientFaint); stroke-width:1.8; opacity:.85; }
+
+.orbit-particle{
+    fill:url(#electronGradient);
+    filter:drop-shadow(0 0 9px rgba(244,211,94,.95)) drop-shadow(0 0 20px rgba(244,211,94,.5));
+}
+
+.orbit-particle.is-faint{
+    fill:url(#electronGradientFaint);
+    filter:drop-shadow(0 0 7px rgba(244,211,94,.7));
+    opacity:.95;
+}
+
+.orbit-core{
+    position:absolute;
+    width:190px;
+    height:190px;
+    border-radius:50%;
+    background:
+      radial-gradient(circle at 30% 24%, rgba(255,238,190,.95) 0%, rgba(244,211,94,.55) 14%, rgba(244,211,94,.12) 34%, rgba(8,7,6,.96) 62%, #020202 100%);
+    box-shadow:
+      inset -30px -24px 54px rgba(0,0,0,.95),
+      inset 10px 10px 28px rgba(255,238,190,.18),
+      0 0 70px rgba(244,211,94,.32),
+      0 0 140px rgba(244,211,94,.14);
+    animation:coreBreath 7s ease-in-out infinite;
+    z-index:2;
+}
+
+.orbit-core::after{
+    content:"";
+    position:absolute;
+    inset:-1px;
+    border-radius:50%;
+    border:1px solid rgba(244,211,94,.35);
+    pointer-events:none;
 }
 
 @media(max-width:980px){
@@ -166,8 +235,42 @@ grid-template-columns:1fr;
 }
 
 .hero-visual{
-height:420px;
+height:460px;
 margin-top:0px;
+}
+
+.orbit-svg{
+    width:400px;
+    height:400px;
+}
+
+.orbit-glow{
+    width:460px;
+    height:460px;
+}
+
+.orbit-core{
+    width:132px;
+    height:132px;
+}
+
+}
+
+@media(max-width:480px){
+
+.orbit-svg{
+    width:310px;
+    height:310px;
+}
+
+.orbit-glow{
+    width:350px;
+    height:350px;
+}
+
+.orbit-core{
+    width:100px;
+    height:100px;
 }
 
 }
@@ -372,6 +475,20 @@ opacity:.35;
     gap:1px;
 
     width:100%;
+    margin-top:48px;
+
+    background:var(--line);
+    border:1px solid var(--line);
+
+    overflow:hidden;
+}
+
+.who-grid2{
+    display:grid;
+    grid-template-columns:repeat(1, minmax(0,1fr));
+    gap:1px;
+
+    width:50%;
     margin-top:48px;
 
     background:var(--line);
@@ -618,6 +735,877 @@ opacity:.35;
     50%{ transform:scale(1.05); }
   }
   .logo-mark-nav{ animation:markPulse 4.5s ease-in-out infinite; }
+
+ /* =========================================================
+   PUBLISHED PAPERS
+   3D RESEARCH CORE
+   ========================================================= */
+
+.published-section {
+  position: relative;
+  overflow: hidden;
+}
+
+.published-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  align-items: center;
+  gap: 40px;
+  min-height: 620px;
+}
+
+
+/* =========================================================
+   LEFT CONTENT
+   ========================================================= */
+
+.published-copy {
+  position: relative;
+  z-index: 5;
+  padding-right: 30px;
+}
+
+.published-copy .sec-head {
+  margin-bottom: 55px;
+}
+
+.published-status {
+  position: relative;
+  padding-left: 22px;
+  border-left: 1px solid rgba(244, 211, 94, 0.3);
+}
+
+.published-status-tag {
+  color: var(--yellow);
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  margin-bottom: 18px;
+}
+
+.published-status-tag span {
+  opacity: 0.35;
+  margin: 0 5px;
+}
+
+.published-status-main {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.published-status-main h3 {
+  margin: 0;
+  color: var(--pale);
+  font-size: clamp(24px, 3vw, 38px);
+  font-weight: 500;
+  letter-spacing: -0.04em;
+}
+
+.published-status p {
+  margin: 12px 0 0;
+  max-width: 390px;
+  color: var(--dim);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.status-dot {
+  width: 7px;
+  height: 7px;
+  flex: 0 0 7px;
+  border-radius: 50%;
+  background: var(--yellow);
+  box-shadow:
+    0 0 8px rgba(244, 211, 94, 0.9),
+    0 0 24px rgba(244, 211, 94, 0.45);
+  animation: statusPulse 2.5s ease-in-out infinite;
+}
+
+
+/* =========================================================
+   3D CORE STAGE
+   ========================================================= */
+
+.research-core-stage {
+  position: relative;
+  width: 100%;
+  height: 620px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  perspective: 1200px;
+  isolation: isolate;
+}
+
+
+/* =========================================================
+   GLOW
+   ========================================================= */
+
+.core-glow {
+  position: absolute;
+  width: 340px;
+  height: 340px;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(244, 211, 94, 0.15) 0%,
+      rgba(244, 211, 94, 0.06) 30%,
+      rgba(244, 211, 94, 0.02) 52%,
+      transparent 72%
+    );
+
+  filter: blur(22px);
+
+  animation: coreBreath 5s ease-in-out infinite;
+
+  z-index: -2;
+}
+
+
+/* =========================================================
+   ORBIT RINGS
+   ========================================================= */
+
+.core-orbit {
+  position: absolute;
+
+  border: 1px solid rgba(244, 211, 94, 0.13);
+  border-radius: 50%;
+
+  pointer-events: none;
+}
+
+.orbit-one {
+  width: 410px;
+  height: 155px;
+
+  transform:
+    rotateX(68deg)
+    rotateZ(-18deg);
+
+  animation: orbitOne 16s linear infinite;
+}
+
+.orbit-two {
+  width: 350px;
+  height: 205px;
+
+  border-color: rgba(244, 211, 94, 0.08);
+
+  transform:
+    rotateX(70deg)
+    rotateY(22deg)
+    rotateZ(25deg);
+
+  animation: orbitTwo 22s linear infinite reverse;
+}
+
+.orbit-three {
+  width: 430px;
+  height: 120px;
+
+  border-color: rgba(244, 211, 94, 0.055);
+
+  transform:
+    rotateY(66deg)
+    rotateZ(-20deg);
+
+  animation: orbitThree 28s linear infinite;
+}
+
+
+/* =========================================================
+   CORE OBJECT
+   ========================================================= */
+
+.core-object {
+  position: relative;
+
+  width: 235px;
+  height: 235px;
+
+  transform-style: preserve-3d;
+
+  animation: coreFloat 6s ease-in-out infinite;
+
+  z-index: 3;
+}
+
+.core-sphere {
+  position: absolute;
+  inset: 0;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle at 31% 25%,
+      rgba(255,255,255,0.24) 0%,
+      rgba(244,211,94,0.14) 8%,
+      rgba(244,211,94,0.045) 24%,
+      rgba(12,12,10,0.96) 62%,
+      #030303 100%
+    );
+
+  border: 1px solid rgba(244,211,94,0.32);
+
+  box-shadow:
+    inset -35px -30px 70px rgba(0,0,0,0.92),
+    inset 15px 12px 30px rgba(244,211,94,0.08),
+    0 0 35px rgba(244,211,94,0.08),
+    0 0 90px rgba(244,211,94,0.045);
+
+  overflow: hidden;
+}
+
+
+/* =========================================================
+   SPHERE GRID
+   ========================================================= */
+
+.sphere-grid {
+  position: absolute;
+  inset: -8%;
+
+  border-radius: 50%;
+
+  opacity: 0.28;
+
+  background:
+    repeating-linear-gradient(
+      90deg,
+      transparent 0px,
+      transparent 20px,
+      rgba(244,211,94,0.12) 21px,
+      transparent 22px
+    );
+
+  transform: rotate(-18deg) scaleX(0.72);
+
+  -webkit-mask-image:
+    radial-gradient(circle, black 35%, transparent 72%);
+
+  mask-image:
+    radial-gradient(circle, black 35%, transparent 72%);
+
+  animation: gridDrift 12s linear infinite;
+}
+
+
+/* =========================================================
+   HIGHLIGHT
+   ========================================================= */
+
+.sphere-highlight {
+  position: absolute;
+
+  width: 95px;
+  height: 65px;
+
+  top: 30px;
+  left: 40px;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      ellipse,
+      rgba(244,211,94,0.2),
+      transparent 70%
+    );
+
+  filter: blur(12px);
+
+  transform: rotate(-30deg);
+}
+
+
+/* =========================================================
+   CENTRAL NUCLEUS
+   ========================================================= */
+
+.core-nucleus {
+  position: absolute;
+
+  width: 34px;
+  height: 34px;
+
+  left: 50%;
+  top: 50%;
+
+  transform: translate(-50%, -50%);
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle,
+      #fff8c8 0%,
+      var(--yellow) 24%,
+      rgba(244,211,94,0.5) 48%,
+      transparent 72%
+    );
+
+  box-shadow:
+    0 0 12px rgba(244,211,94,0.95),
+    0 0 35px rgba(244,211,94,0.55),
+    0 0 75px rgba(244,211,94,0.25);
+
+  animation: nucleusPulse 3s ease-in-out infinite;
+}
+
+.core-nucleus span {
+  position: absolute;
+  inset: -10px;
+
+  border: 1px solid rgba(244,211,94,0.22);
+  border-radius: 50%;
+}
+
+
+/* =========================================================
+   PARTICLES
+   ========================================================= */
+
+.core-particles {
+  position: absolute;
+  inset: 0;
+
+  pointer-events: none;
+  z-index: 2;
+}
+
+.core-particles span {
+  position: absolute;
+
+  width: 3px;
+  height: 3px;
+
+  border-radius: 50%;
+
+  background: var(--yellow);
+
+  box-shadow:
+    0 0 9px rgba(244,211,94,0.8);
+}
+
+
+/* particle positions */
+
+.core-particles span:nth-child(1) {
+  left: 24%;
+  top: 31%;
+  animation: particle1 5s ease-in-out infinite;
+}
+
+.core-particles span:nth-child(2) {
+  left: 74%;
+  top: 30%;
+  animation: particle2 6s ease-in-out infinite;
+}
+
+.core-particles span:nth-child(3) {
+  left: 19%;
+  top: 55%;
+  animation: particle3 7s ease-in-out infinite;
+}
+
+.core-particles span:nth-child(4) {
+  left: 82%;
+  top: 58%;
+  animation: particle4 5.5s ease-in-out infinite;
+}
+
+.core-particles span:nth-child(5) {
+  left: 32%;
+  top: 76%;
+  animation: particle5 6.5s ease-in-out infinite;
+}
+
+.core-particles span:nth-child(6) {
+  left: 68%;
+  top: 73%;
+  animation: particle6 7s ease-in-out infinite;
+}
+
+.core-particles span:nth-child(7) {
+  left: 51%;
+  top: 15%;
+  width: 2px;
+  height: 2px;
+}
+
+.core-particles span:nth-child(8) {
+  left: 11%;
+  top: 38%;
+  width: 2px;
+  height: 2px;
+}
+
+.core-particles span:nth-child(9) {
+  left: 88%;
+  top: 42%;
+  width: 2px;
+  height: 2px;
+}
+
+.core-particles span:nth-child(10) {
+  left: 56%;
+  top: 89%;
+  width: 2px;
+  height: 2px;
+}
+
+
+/* =========================================================
+   TECHNICAL CROSSHAIRS
+   ========================================================= */
+
+.core-crosshair {
+  position: absolute;
+
+  width: 22px;
+  height: 22px;
+
+  opacity: 0.4;
+}
+
+.core-crosshair::before,
+.core-crosshair::after {
+  content: "";
+
+  position: absolute;
+
+  background: rgba(244,211,94,0.35);
+}
+
+.core-crosshair::before {
+  width: 100%;
+  height: 1px;
+
+  left: 0;
+  top: 50%;
+}
+
+.core-crosshair::after {
+  width: 1px;
+  height: 100%;
+
+  left: 50%;
+  top: 0;
+}
+
+.crosshair-one {
+  top: 21%;
+  right: 15%;
+}
+
+.crosshair-two {
+  bottom: 22%;
+  left: 15%;
+
+  transform: scale(0.65);
+
+  opacity: 0.25;
+}
+
+
+/* =========================================================
+   MICRO DATA
+   ========================================================= */
+
+.core-coordinate,
+.core-index,
+.core-data {
+  position: absolute;
+
+  color: var(--dim);
+
+  font-size: 8px;
+  letter-spacing: 0.13em;
+  line-height: 1.7;
+
+  opacity: 0.6;
+
+  z-index: 4;
+}
+
+.core-coordinate {
+  top: 105px;
+  right: 22px;
+
+  text-align: right;
+}
+
+.core-index {
+  top: 120px;
+  left: 18px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.core-index span:first-child {
+  color: var(--yellow);
+  font-size: 10px;
+}
+
+.core-data {
+  right: 35px;
+  bottom: 105px;
+
+  display: flex;
+  flex-direction: column;
+
+  text-align: right;
+
+  gap: 3px;
+}
+
+.core-data span:first-child {
+  color: var(--yellow);
+}
+
+
+/* =========================================================
+   ANIMATIONS
+   ========================================================= */
+
+@keyframes coreFloat {
+  0%, 100% {
+    transform: translateY(0) rotateX(0deg) rotateY(0deg);
+  }
+
+  50% {
+    transform: translateY(-10px) rotateX(2deg) rotateY(5deg);
+  }
+}
+
+@keyframes coreBreath {
+  0%, 100% {
+    transform: scale(0.92);
+    opacity: 0.6;
+  }
+
+  50% {
+    transform: scale(1.08);
+    opacity: 1;
+  }
+}
+
+@keyframes nucleusPulse {
+  0%, 100% {
+    transform: translate(-50%, -50%) scale(0.88);
+  }
+
+  50% {
+    transform: translate(-50%, -50%) scale(1.12);
+  }
+}
+
+@keyframes orbitOne {
+  from {
+    transform:
+      rotateX(68deg)
+      rotateZ(-18deg)
+      rotate(0deg);
+  }
+
+  to {
+    transform:
+      rotateX(68deg)
+      rotateZ(-18deg)
+      rotate(360deg);
+  }
+}
+
+@keyframes orbitTwo {
+  from {
+    transform:
+      rotateX(70deg)
+      rotateY(22deg)
+      rotateZ(25deg)
+      rotate(0deg);
+  }
+
+  to {
+    transform:
+      rotateX(70deg)
+      rotateY(22deg)
+      rotateZ(25deg)
+      rotate(-360deg);
+  }
+}
+
+@keyframes orbitThree {
+  from {
+    transform:
+      rotateY(66deg)
+      rotateZ(-20deg)
+      rotate(0deg);
+  }
+
+  to {
+    transform:
+      rotateY(66deg)
+      rotateZ(-20deg)
+      rotate(360deg);
+  }
+}
+
+@keyframes gridDrift {
+  from {
+    transform:
+      rotate(-18deg)
+      translateX(0)
+      scaleX(0.72);
+  }
+
+  to {
+    transform:
+      rotate(-18deg)
+      translateX(35px)
+      scaleX(0.72);
+  }
+}
+
+@keyframes statusPulse {
+  0%, 100% {
+    opacity: 0.45;
+    transform: scale(0.8);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.15);
+  }
+}
+
+@keyframes particle1 {
+  0%, 100% {
+    transform: translate(0,0);
+    opacity: .3;
+  }
+
+  50% {
+    transform: translate(25px,-20px);
+    opacity: 1;
+  }
+}
+
+@keyframes particle2 {
+  0%, 100% {
+    transform: translate(0,0);
+    opacity: .3;
+  }
+
+  50% {
+    transform: translate(-20px,25px);
+    opacity: 1;
+  }
+}
+
+@keyframes particle3 {
+  0%, 100% {
+    transform: translate(0,0);
+    opacity: .25;
+  }
+
+  50% {
+    transform: translate(18px,-15px);
+    opacity: .9;
+  }
+}
+
+@keyframes particle4 {
+  0%, 100% {
+    transform: translate(0,0);
+    opacity: .3;
+  }
+
+  50% {
+    transform: translate(-25px,-18px);
+    opacity: 1;
+  }
+}
+
+@keyframes particle5 {
+  0%, 100% {
+    transform: translate(0,0);
+    opacity: .3;
+  }
+
+  50% {
+    transform: translate(20px,15px);
+    opacity: .95;
+  }
+}
+
+@keyframes particle6 {
+  0%, 100% {
+    transform: translate(0,0);
+    opacity: .25;
+  }
+
+  50% {
+    transform: translate(-18px,12px);
+    opacity: .9;
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+/* =========================================================
+   PUBLISHED PAPERS — MOBILE
+   ========================================================= */
+
+
+/* =========================================================
+   SMALL PHONES
+   ========================================================= */
+
+
+
+
+/* =========================================================
+   ACCESSIBILITY
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .core-object,
+  .core-glow,
+  .core-orbit,
+  .core-nucleus,
+  .sphere-grid,
+  .status-dot,
+  .core-particles span {
+    animation: none !important;
+  }
+}
+
+/* =========================================================
+   PUBLISHED PAPERS — RESPONSIVE
+   (single, correctly-scoped mobile treatment)
+   ========================================================= */
+
+@media (max-width: 860px) {
+
+  .published-layout {
+    grid-template-columns: 1fr;
+    gap: 56px;
+    min-height: 0;
+  }
+
+  .published-copy {
+    padding-right: 0;
+  }
+
+  .published-copy .sec-head {
+    margin-bottom: 40px;
+  }
+
+  .research-core-stage {
+    height: 440px;
+  }
+
+  .core-object {
+    width: 190px;
+    height: 190px;
+  }
+
+  .orbit-one {
+    width: 330px;
+    height: 125px;
+  }
+
+  .orbit-two {
+    width: 280px;
+    height: 165px;
+  }
+
+  .orbit-three {
+    width: 345px;
+    height: 96px;
+  }
+
+  .core-coordinate {
+    top: 75px;
+    right: 12px;
+  }
+
+  .core-index {
+    top: 88px;
+    left: 8px;
+  }
+
+  .core-data {
+    right: 20px;
+    bottom: 75px;
+  }
+}
+
+@media (max-width: 480px) {
+
+  .published-layout {
+    gap: 44px;
+  }
+
+  .research-core-stage {
+    height: 360px;
+  }
+
+  .core-object {
+    width: 150px;
+    height: 150px;
+  }
+
+  .orbit-one {
+    width: 260px;
+    height: 100px;
+  }
+
+  .orbit-two {
+    width: 220px;
+    height: 132px;
+  }
+
+  .orbit-three {
+    width: 270px;
+    height: 78px;
+  }
+
+  .core-coordinate,
+  .core-index,
+  .core-data {
+    font-size: 7px;
+  }
+
+  .core-coordinate {
+    top: 58px;
+    right: 6px;
+  }
+
+  .core-index {
+    top: 68px;
+    left: 4px;
+  }
+
+  .core-data {
+    right: 12px;
+    bottom: 58px;
+  }
+}
 </style>
 </head>
 <body>
@@ -631,12 +1619,12 @@ opacity:.35;
     <div class="step-label" data-target="mission" style="top:0%">Mission</div>
     <div class="step-tick" data-target="program" style="top:20%"></div>
     <div class="step-label" data-target="program" style="top:20%">Program</div>
-    <div class="step-tick" data-target="trajectory" style="top:40%"></div>
-    <div class="step-label" data-target="trajectory" style="top:40%">Trajectory</div>
+    <div class="step-tick" data-target="who" style="top:40%"></div>
+    <div class="step-label" data-target="who" style="top:40%">Partners</div>
     <div class="step-tick" data-target="team" style="top:60%"></div>
     <div class="step-label" data-target="team" style="top:60%">Team</div>
-    <div class="step-tick" data-target="who" style="top:80%"></div>
-    <div class="step-label" data-target="who" style="top:80%">Partners</div>
+    <div class="step-tick" data-target="published-papers" style="top:80%"></div>
+    <div class="step-label" data-target="published-papers" style="top:80%">Papers</div>
     <div class="step-tick" data-target="join" style="top:100%"></div>
     <div class="step-label" data-target="join" style="top:100%">Contact</div>
   </div>
@@ -653,6 +1641,7 @@ opacity:.35;
       <a href="#program">Our Approach</a>
       <a href="#who">Get Involved</a>
       <a href="#team">Team</a>
+      <a href="#published-papers">Papers</a>
       <a href="#join" class="nav-cta">Contact</a>
     </div>
   </nav>
@@ -691,7 +1680,81 @@ opacity:.35;
         </div>
     </div>
     <div class="hero-visual">
-        <canvas id="quantumCanvas"></canvas>
+      <div class="orbit-stage" id="orbitStage">
+
+        <div class="orbit-glow"></div>
+
+        <svg class="orbit-svg" viewBox="0 0 300 300" aria-hidden="true">
+
+          <defs>
+            <linearGradient id="ringGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="rgba(255,238,190,.95)"></stop>
+              <stop offset="45%" stop-color="rgba(244,211,94,.55)"></stop>
+              <stop offset="100%" stop-color="rgba(244,211,94,.9)"></stop>
+            </linearGradient>
+            <linearGradient id="ringGradientMid" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="rgba(255,238,190,.8)"></stop>
+              <stop offset="50%" stop-color="rgba(244,211,94,.4)"></stop>
+              <stop offset="100%" stop-color="rgba(244,211,94,.75)"></stop>
+            </linearGradient>
+            <linearGradient id="ringGradientFaint" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="rgba(255,238,190,.55)"></stop>
+              <stop offset="50%" stop-color="rgba(244,211,94,.22)"></stop>
+              <stop offset="100%" stop-color="rgba(244,211,94,.5)"></stop>
+            </linearGradient>
+            <radialGradient id="electronGradient" cx="34%" cy="30%" r="70%">
+              <stop offset="0%" stop-color="#fff8e6"></stop>
+              <stop offset="35%" stop-color="var(--yellow)"></stop>
+              <stop offset="100%" stop-color="#b8860f"></stop>
+            </radialGradient>
+            <radialGradient id="electronGradientFaint" cx="34%" cy="30%" r="70%">
+              <stop offset="0%" stop-color="#fff8e6"></stop>
+              <stop offset="45%" stop-color="var(--yellow-soft)"></stop>
+              <stop offset="100%" stop-color="#8a6c1f"></stop>
+            </radialGradient>
+          </defs>
+
+          <g transform="rotate(12 150 150)">
+            <g>
+              <animateTransform attributeName="transform" type="rotate" from="0 150 150" to="360 150 150" dur="130s" repeatCount="indefinite"></animateTransform>
+              <path id="orbitPathA" class="orbit-ring is-faint" d="M 16,150 a 134,40 0 1,0 268,0 a 134,40 0 1,0 -268,0"></path>
+              <circle class="orbit-particle is-faint" r="3.4">
+                <animateMotion dur="26s" repeatCount="indefinite" rotate="auto">
+                  <mpath href="#orbitPathA"></mpath>
+                </animateMotion>
+              </circle>
+            </g>
+          </g>
+
+          <g transform="rotate(-20 150 150)">
+            <g>
+              <animateTransform attributeName="transform" type="rotate" from="0 150 150" to="-360 150 150" dur="95s" repeatCount="indefinite"></animateTransform>
+              <path id="orbitPathB" class="orbit-ring is-mid" d="M 44,150 a 106,64 0 1,0 212,0 a 106,64 0 1,0 -212,0"></path>
+              <circle class="orbit-particle" r="4.4">
+                <animateMotion dur="17s" repeatCount="indefinite" rotate="auto">
+                  <mpath href="#orbitPathB"></mpath>
+                </animateMotion>
+              </circle>
+            </g>
+          </g>
+
+          <g transform="rotate(30 150 150)">
+            <g>
+              <animateTransform attributeName="transform" type="rotate" from="0 150 150" to="360 150 150" dur="70s" repeatCount="indefinite"></animateTransform>
+              <path id="orbitPathC" class="orbit-ring" d="M 76,150 a 74,50 0 1,0 148,0 a 74,50 0 1,0 -148,0"></path>
+              <circle class="orbit-particle" r="3.8">
+                <animateMotion dur="11s" repeatCount="indefinite" rotate="auto">
+                  <mpath href="#orbitPathC"></mpath>
+                </animateMotion>
+              </circle>
+            </g>
+          </g>
+
+        </svg>
+
+        <div class="orbit-core"></div>
+
+      </div>
     </div>
 </div>
 </section>
@@ -826,6 +1889,102 @@ The challenge extends beyond access. Many schools and education organizations re
   </div>
 </section>
 
+<section class="section-pad published-section" id="published-papers">
+  <div class="wrap">
+
+    <div class="published-layout">
+
+      <div class="published-copy reveal">
+
+        <div class="sec-head">
+          <div class="eyebrow mono">INAUGURAL COHORT</div>
+
+          <h2>Published Papers</h2>
+
+          <p>
+            The first pages of something bigger. Soon, this space will hold the questions we chose to pursue, and what we found along the way.
+          </p>
+        </div>
+
+        <div class="published-status">
+          <div class="published-status-tag mono">
+            RESEARCH ARCHIVE <span>//</span> 001
+          </div>
+
+          <div class="published-status-main">
+            <span class="status-dot"></span>
+            <h3>Coming Soon</h3>
+          </div>
+
+          <p>
+            The first papers from the StellerSteps inaugural cohort
+            will appear here.
+          </p>
+        </div>
+
+      </div>
+
+
+      <div class="research-core-stage">
+
+        <div class="core-glow"></div>
+
+        <div class="core-orbit orbit-one"></div>
+        <div class="core-orbit orbit-two"></div>
+        <div class="core-orbit orbit-three"></div>
+
+        <div class="core-object">
+
+          <div class="core-sphere">
+            <div class="sphere-grid"></div>
+            <div class="sphere-highlight"></div>
+            <div class="core-nucleus">
+              <span></span>
+            </div>
+          </div>
+
+          <div class="core-particles">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+
+        </div>
+
+        <div class="core-crosshair crosshair-one"></div>
+        <div class="core-crosshair crosshair-two"></div>
+
+        <div class="core-coordinate mono">
+          28.6139° N<br>
+          77.2090° E
+        </div>
+
+        <div class="core-index mono">
+          <span>SS / 001</span>
+          <span>RESEARCH</span>
+          <span>COHORT_01</span>
+        </div>
+
+        <div class="core-data mono">
+          <span>STATUS: ACTIVE</span>
+          <span>ARCHIVE: 00%</span>
+          <span>PHASE: PREP</span>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
 <section class="join" id="join">
   <div class="wrap join-inner">
     <div class="eyebrow mono" style="justify-content:center;">Let's build this together</div>
@@ -895,28 +2054,57 @@ The challenge extends beyond access. Many schools and education organizations re
 
   // Breakaway diagram trigger
   const breakaway = document.querySelector('.breakaway');
-  const breakObserver = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if(e.isIntersecting){ breakaway.classList.add('in-view'); breakObserver.unobserve(breakaway); } });
-  }, { threshold: 0.25 });
-  breakObserver.observe(breakaway);
+  if (breakaway) {
+    const breakObserver = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if(e.isIntersecting){ breakaway.classList.add('in-view'); breakObserver.unobserve(breakaway); } });
+    }, { threshold: 0.25 });
+    breakObserver.observe(breakaway);
+  }
 
-  // Starfield canvas
+  // Starfield canvas -- simple, evenly-spaced deep-space field
   const canvas = document.getElementById('starfield');
   const ctx = canvas.getContext('2d');
   let stars = [];
   const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const orbitStage = document.getElementById('orbitStage');
+
+  if (prefersReduced && orbitStage) {
+    const orbitSvg = orbitStage.querySelector('.orbit-svg');
+    if (orbitSvg && orbitSvg.pauseAnimations) orbitSvg.pauseAnimations();
+  }
 
   function resize(){
     canvas.width = canvas.offsetWidth;
     canvas.height = canvas.offsetHeight;
-    const count = Math.floor((canvas.width * canvas.height) / 9000);
-    stars = Array.from({length: count}, () => ({
-      x: Math.random()*canvas.width,
-      y: Math.random()*canvas.height,
-      r: Math.random()*1.3 + 0.3,
-      phase: Math.random()*Math.PI*2,
-      speed: Math.random()*0.015 + 0.005
-    }));
+
+    // Keep a small clear buffer directly around the visual so stars never clutter on top of it
+    let clearX = canvas.width * 0.5;
+    let clearY = canvas.height * 0.5;
+    let clearR = 0;
+    if (orbitStage) {
+      const stageRect = orbitStage.getBoundingClientRect();
+      const canvasRect = canvas.getBoundingClientRect();
+      clearX = (stageRect.left - canvasRect.left) + stageRect.width / 2;
+      clearY = (stageRect.top - canvasRect.top) + stageRect.height / 2;
+      clearR = (Math.max(stageRect.width, stageRect.height) / 2) * 0.62;
+    }
+
+    const count = Math.floor((canvas.width * canvas.height) / 11000);
+    stars = [];
+    let attempts = 0;
+    while (stars.length < count && attempts < count * 4) {
+      attempts++;
+      const x = Math.random()*canvas.width;
+      const y = Math.random()*canvas.height;
+      if (clearR && Math.hypot(x - clearX, y - clearY) < clearR) continue;
+      stars.push({
+        x, y,
+        r: Math.random()*1.2 + 0.35,
+        phase: Math.random()*Math.PI*2,
+        speed: Math.random()*0.022 + 0.009,
+        bright: Math.random() < 0.07
+      });
+    }
   }
   window.addEventListener('resize', resize);
   resize();
@@ -925,9 +2113,11 @@ The challenge extends beyond access. Many schools and education organizations re
     ctx.clearRect(0,0,canvas.width,canvas.height);
     stars.forEach(s => {
       const twinkle = prefersReduced ? 0.7 : 0.5 + 0.5*Math.sin(t*s.speed + s.phase);
+      const r = s.bright ? s.r * 1.9 : s.r;
+      const alpha = s.bright ? 0.55 + twinkle*0.45 : 0.22 + twinkle*0.46;
       ctx.beginPath();
-      ctx.arc(s.x, s.y, s.r, 0, Math.PI*2);
-      ctx.fillStyle = `rgba(246,245,242,${0.15 + twinkle*0.55})`;
+      ctx.arc(s.x, s.y, r, 0, Math.PI*2);
+      ctx.fillStyle = `rgba(246,245,242,${alpha})`;
       ctx.fill();
     });
     if(!prefersReduced) requestAnimationFrame(draw);
@@ -961,7 +2151,7 @@ The challenge extends beyond access. Many schools and education organizations re
   onScroll();
 
   // Active step tracking per section
-  const stepTargets = ['mission','program','trajectory','team','who','join'];
+  const stepTargets = ['mission','program','who','team','published-papers','join'];
   const stepTicks = document.querySelectorAll('.step-tick');
   const stepLabels = document.querySelectorAll('.step-label');
   const stepSections = stepTargets.map(id => document.getElementById(id)).filter(Boolean);
@@ -978,6 +2168,5 @@ The challenge extends beyond access. Many schools and education organizations re
 
   stepSections.forEach(sec => stepObserver.observe(sec));
 </script>
-<script type="module" src="hero3d.js"></script>
 </body>
 </html>
