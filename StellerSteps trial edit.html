@@ -552,19 +552,13 @@ opacity:.35;
   .hud-corner.tr{top:12px;right:12px;border-top:2px solid var(--yellow);border-right:2px solid var(--yellow)}
   .hud-corner.bl{bottom:12px;left:12px;border-bottom:2px solid var(--yellow);border-left:2px solid var(--yellow)}
   .hud-corner.br{bottom:12px;right:12px;border-bottom:2px solid var(--yellow);border-right:2px solid var(--yellow)}
-  .team-info{display:flex;flex-direction:column;justify-content:center;align-items:flex-start;padding:clamp(28px,5vw,64px)}
+  .team-link{display:inline-flex;align-items:center;gap:8px;margin-top:28px;padding:10px 14px;border:1px solid var(--line-strong);color:var(--dim);font:10px 'IBM Plex Mono',monospace;letter-spacing:.07em;text-transform:uppercase;transition:color .2s ease,border-color .2s ease,background .2s ease}\n  .team-link:hover{color:var(--yellow);border-color:var(--yellow);background:rgba(244,211,94,.04)}\n  .team-info{display:flex;flex-direction:column;justify-content:center;align-items:flex-start;padding:clamp(28px,5vw,64px)}
   .team-card h3{font-size:clamp(2rem,4vw,3.25rem);line-height:1.08;margin-bottom:12px}
   .team-role{color:var(--yellow-soft);font-size:11px;margin-bottom:18px}
   .founder-accent{width:min(100%,220px);height:2px;margin-bottom:24px;background:linear-gradient(90deg,transparent,var(--yellow),transparent);background-size:200% 100%;animation:founderLine 3s ease-in-out infinite}
   @keyframes founderLine{0%,100%{background-position:100% 0}50%{background-position:0 0}}
   .team-bio{max-width:54ch;color:var(--dim);font-size:1rem;line-height:1.8}
-  .team-details{display:grid;gap:10px;width:min(100%,430px);margin-top:28px}
-  .team-detail{display:flex;align-items:center;justify-content:space-between;gap:18px;min-height:48px;padding:12px 14px;border:1px solid var(--line);background:rgba(255,255,255,.015)}
-  .team-detail-label{flex:none;color:var(--yellow);font:10px 'IBM Plex Mono',monospace;letter-spacing:.08em;text-transform:uppercase}
-  .team-detail-value{color:var(--pale);font-size:13px;text-align:right}
-  .team-detail a{color:var(--pale);font-size:13px;text-align:right;transition:color .2s ease}
-  .team-detail a:hover{color:var(--yellow)}
-  @media(max-width:760px){.team-grid{margin-top:28px}.team-card{grid-template-columns:1fr}.team-photo-wrap{min-height:0;aspect-ratio:4/3}.team-info{padding:28px 24px 32px}.team-detail{align-items:flex-start;flex-direction:column;gap:5px}.team-detail-value,.team-detail a{text-align:left}}
+  @media(max-width:760px){.team-grid{margin-top:28px}.team-card{grid-template-columns:1fr}.team-photo-wrap{min-height:0;aspect-ratio:4/3}.team-info{padding:28px 24px 32px}.team-link{margin-top:24px}}
   @media(prefers-reduced-motion:reduce){.team-card,.team-photo{transition:none}.founder-accent{animation:none}}
   /* ---------- VISION ---------- */
   .vision-grid{
@@ -1814,12 +1808,9 @@ The challenge extends beyond access. Many schools and education organizations re
           <h3>Arnav Singh</h3>
           <p class="team-role mono">Founder &amp; CEO</p>
           <div class="founder-accent" aria-hidden="true"></div>
-          <p class="team-bio">Arnav is a passionate high school student working to champion research in India. Through StellerSteps, he is building an ecosystem that encourages students to explore new domains, follow their curiosity, and look beyond conventional career paths.</p>
-          <div class="team-details">
-            <div class="team-detail"><span class="team-detail-label">Student</span><span class="team-detail-value">St. Xavier's School, Rohini</span></div>
-            <div class="team-detail"><span class="team-detail-label">Connect</span><a href="https://www.linkedin.com/in/arnavsingh11/" target="_blank" rel="noopener noreferrer">View LinkedIn profile ↗</a></div>
-          </div>
-        </div>
+          <p class="team-bio">Through StellerSteps, I aim to champion research in India and build an ecosystem where students can explore new domains, follow their curiosity, and consider paths beyond conventional career choices.</p>
+          <a class="team-link" href="https://www.linkedin.com/in/arnavsingh11/" target="_blank" rel="noopener noreferrer">Connect on LinkedIn <span aria-hidden="true">↗</span></a>
+        </div>       </div>
       </article>
     </div>
   </div>
