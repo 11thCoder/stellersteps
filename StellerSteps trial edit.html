@@ -537,8 +537,8 @@ opacity:.35;
 }
 
   /* ---------- TEAM ---------- */
-  .team-grid{display:grid;grid-template-columns:minmax(0,1fr);margin:36px auto 0;max-width:1040px}
-  .team-card{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);background:linear-gradient(135deg,var(--panel-2),var(--panel) 58%,#111116);border:1px solid var(--line-strong);overflow:hidden;transition:border-color .3s ease,background .3s ease}
+  .team-grid{display:grid;grid-template-columns:minmax(0,1fr);width:100%;margin:36px 0 0}
+  .team-card{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);width:100%;background:linear-gradient(135deg,var(--panel-2),var(--panel) 58%,#111116);border:1px solid var(--line-strong);overflow:hidden;transition:border-color .3s ease,background .3s ease}
   .team-card:hover{border-color:var(--yellow)}
   .team-photo-wrap{position:relative;min-height:420px;aspect-ratio:4/5;overflow:hidden;background:#000}
   .team-photo{width:100%;height:100%;object-fit:cover;display:block;filter:grayscale(1) contrast(1.05) brightness(.88);transform:scale(1.02);transition:filter .7s ease,transform .7s ease}
@@ -553,15 +553,19 @@ opacity:.35;
   .hud-corner.bl{bottom:12px;left:12px;border-bottom:2px solid var(--yellow);border-left:2px solid var(--yellow)}
   .hud-corner.br{bottom:12px;right:12px;border-bottom:2px solid var(--yellow);border-right:2px solid var(--yellow)}
   .team-info{display:flex;flex-direction:column;justify-content:center;align-items:flex-start;padding:clamp(28px,5vw,64px)}
-  .founder-index{color:var(--yellow);font-size:10px;margin-bottom:24px}
   .team-card h3{font-size:clamp(2rem,4vw,3.25rem);line-height:1.08;margin-bottom:12px}
-  .team-role{color:var(--yellow-soft);font-size:11px;margin-bottom:26px}
-  .team-bio{max-width:48ch;color:var(--dim);font-size:1rem;line-height:1.8}
-  .team-focus{display:flex;flex-wrap:wrap;gap:8px;margin-top:30px}
-  .team-focus span{border:1px solid var(--line-strong);color:var(--pale);padding:8px 11px;font:10px 'IBM Plex Mono',monospace;letter-spacing:.06em;text-transform:uppercase}
-  @media(max-width:760px){.team-grid{margin-top:28px}.team-card{grid-template-columns:1fr}.team-photo-wrap{min-height:0;aspect-ratio:4/3}.team-info{padding:28px 24px 32px}.founder-index{margin-bottom:18px}.team-role{margin-bottom:20px}.team-focus{margin-top:24px}}
-  @media(prefers-reduced-motion:reduce){.team-card,.team-photo{transition:none}}
-
+  .team-role{color:var(--yellow-soft);font-size:11px;margin-bottom:18px}
+  .founder-accent{width:min(100%,220px);height:2px;margin-bottom:24px;background:linear-gradient(90deg,transparent,var(--yellow),transparent);background-size:200% 100%;animation:founderLine 3s ease-in-out infinite}
+  @keyframes founderLine{0%,100%{background-position:100% 0}50%{background-position:0 0}}
+  .team-bio{max-width:54ch;color:var(--dim);font-size:1rem;line-height:1.8}
+  .team-details{display:grid;gap:10px;width:min(100%,430px);margin-top:28px}
+  .team-detail{display:flex;align-items:center;justify-content:space-between;gap:18px;min-height:48px;padding:12px 14px;border:1px solid var(--line);background:rgba(255,255,255,.015)}
+  .team-detail-label{flex:none;color:var(--yellow);font:10px 'IBM Plex Mono',monospace;letter-spacing:.08em;text-transform:uppercase}
+  .team-detail-value{color:var(--pale);font-size:13px;text-align:right}
+  .team-detail a{color:var(--pale);font-size:13px;text-align:right;transition:color .2s ease}
+  .team-detail a:hover{color:var(--yellow)}
+  @media(max-width:760px){.team-grid{margin-top:28px}.team-card{grid-template-columns:1fr}.team-photo-wrap{min-height:0;aspect-ratio:4/3}.team-info{padding:28px 24px 32px}.team-detail{align-items:flex-start;flex-direction:column;gap:5px}.team-detail-value,.team-detail a{text-align:left}}
+  @media(prefers-reduced-motion:reduce){.team-card,.team-photo{transition:none}.founder-accent{animation:none}}
   /* ---------- VISION ---------- */
   .vision-grid{
     display:grid;
@@ -1807,11 +1811,14 @@ The challenge extends beyond access. Many schools and education organizations re
           <span class="hud-corner bl"></span><span class="hud-corner br"></span>
         </div>
         <div class="team-info">
-          <div class="founder-index mono">Founder / 01 · India</div>
           <h3>Arnav Singh</h3>
           <p class="team-role mono">Founder &amp; CEO</p>
-          <p class="team-bio">Building a path for Indian high schoolers to explore theoretical research, collaborate across disciplines, and turn curiosity into discovery.</p>
-          <div class="team-focus" aria-label="StellerSteps focus areas"><span>Research</span><span>Collaboration</span><span>Discovery</span></div>
+          <div class="founder-accent" aria-hidden="true"></div>
+          <p class="team-bio">Arnav is a passionate high school student working to champion research in India. Through StellerSteps, he is building an ecosystem that encourages students to explore new domains, follow their curiosity, and look beyond conventional career paths.</p>
+          <div class="team-details">
+            <div class="team-detail"><span class="team-detail-label">Student</span><span class="team-detail-value">St. Xavier's School, Rohini</span></div>
+            <div class="team-detail"><span class="team-detail-label">Connect</span><a href="https://www.linkedin.com/in/arnavsingh11/" target="_blank" rel="noopener noreferrer">View LinkedIn profile ↗</a></div>
+          </div>
         </div>
       </article>
     </div>
