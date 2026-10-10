@@ -537,29 +537,118 @@ opacity:.35;
 }
 
   /* ---------- TEAM ---------- */
-  .team-grid{display:grid;grid-template-columns:minmax(0,1fr);width:100%;margin:36px 0 0}
-  .team-card{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);width:100%;background:linear-gradient(135deg,var(--panel-2),var(--panel) 58%,#111116);border:1px solid var(--line-strong);overflow:hidden;transition:border-color .3s ease,background .3s ease}
+  .team-grid{
+    display:grid;
+    grid-template-columns:minmax(0,1fr);
+    width:100%;
+    margin:36px 0 0;
+  }
+  .team-card{
+    display:grid;
+    grid-template-columns:minmax(280px,.9fr) minmax(0,1.1fr);
+    width:100%;
+    background:linear-gradient(135deg,var(--panel-2),var(--panel) 58%,#111116);
+    border:1px solid var(--line-strong);
+    overflow:hidden;
+    transition:border-color .3s ease,background .3s ease;
+  }
   .team-card:hover{border-color:var(--yellow)}
-  .team-photo-wrap{position:relative;min-height:420px;aspect-ratio:4/5;overflow:hidden;background:#000}
-  .team-photo{width:100%;height:100%;object-fit:cover;display:block;filter:grayscale(1) contrast(1.05) brightness(.88);transform:scale(1.02);transition:filter .7s ease,transform .7s ease}
-  .team-card:hover .team-photo{filter:grayscale(0) contrast(1) brightness(1);transform:scale(1.06)}
-  .team-photo-wrap::after{content:'';position:absolute;left:0;right:0;top:-40%;height:35%;background:linear-gradient(180deg,transparent,rgba(244,211,94,.24),transparent);pointer-events:none}
+  .team-photo-wrap{
+    position:relative;
+    min-height:400px;
+    overflow:hidden;
+    background:#000;
+  }
+  .team-photo{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    object-position:center 38%;
+    display:block;
+    filter:grayscale(1) contrast(1.05) brightness(.88);
+    transform:scale(1.02);
+    transition:filter .7s ease,transform .7s ease;
+  }
+  .team-card:hover .team-photo{
+    filter:grayscale(0) contrast(1) brightness(1);
+    transform:scale(1.05);
+  }
+  .team-photo-wrap::after{
+    content:'';
+    position:absolute;
+    left:0;
+    right:0;
+    top:-40%;
+    height:35%;
+    background:linear-gradient(180deg,transparent,rgba(244,211,94,.24),transparent);
+    pointer-events:none;
+  }
   .team-card:hover .team-photo-wrap::after{animation:scanSweep 1.2s ease-in-out}
   @keyframes scanSweep{0%{top:-40%}100%{top:100%}}
-  .hud-corner{position:absolute;width:16px;height:16px;opacity:0;transition:opacity .4s ease,width .4s ease,height .4s ease;pointer-events:none}
+  .hud-corner{
+    position:absolute;
+    width:16px;
+    height:16px;
+    opacity:0;
+    transition:opacity .4s ease,width .4s ease,height .4s ease;
+    pointer-events:none;
+  }
   .team-card:hover .hud-corner{opacity:1;width:22px;height:22px}
   .hud-corner.tl{top:12px;left:12px;border-top:2px solid var(--yellow);border-left:2px solid var(--yellow)}
   .hud-corner.tr{top:12px;right:12px;border-top:2px solid var(--yellow);border-right:2px solid var(--yellow)}
   .hud-corner.bl{bottom:12px;left:12px;border-bottom:2px solid var(--yellow);border-left:2px solid var(--yellow)}
   .hud-corner.br{bottom:12px;right:12px;border-bottom:2px solid var(--yellow);border-right:2px solid var(--yellow)}
-  .team-link{display:inline-flex;align-items:center;gap:8px;margin-top:28px;padding:10px 14px;border:1px solid var(--line-strong);color:var(--dim);font:10px 'IBM Plex Mono',monospace;letter-spacing:.07em;text-transform:uppercase;transition:color .2s ease,border-color .2s ease,background .2s ease}\n  .team-link:hover{color:var(--yellow);border-color:var(--yellow);background:rgba(244,211,94,.04)}\n  .team-info{display:flex;flex-direction:column;justify-content:center;align-items:flex-start;padding:clamp(28px,5vw,64px)}
-  .team-card h3{font-size:clamp(2rem,4vw,3.25rem);line-height:1.08;margin-bottom:12px}
+  .team-info{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:flex-start;
+    min-width:0;
+    padding:clamp(28px,5vw,64px);
+  }
+  .team-card h3{
+    font-size:clamp(2rem,4vw,3.25rem);
+    line-height:1.08;
+    margin-bottom:12px;
+  }
   .team-role{color:var(--yellow-soft);font-size:11px;margin-bottom:18px}
-  .founder-accent{width:min(100%,220px);height:2px;margin-bottom:24px;background:linear-gradient(90deg,transparent,var(--yellow),transparent);background-size:200% 100%;animation:founderLine 3s ease-in-out infinite}
+  .founder-accent{
+    width:min(100%,220px);
+    height:2px;
+    margin-bottom:24px;
+    background:linear-gradient(90deg,transparent,var(--yellow),transparent);
+    background-size:200% 100%;
+    animation:founderLine 3s ease-in-out infinite;
+  }
   @keyframes founderLine{0%,100%{background-position:100% 0}50%{background-position:0 0}}
   .team-bio{max-width:54ch;color:var(--dim);font-size:1rem;line-height:1.8}
-  @media(max-width:760px){.team-grid{margin-top:28px}.team-card{grid-template-columns:1fr}.team-photo-wrap{min-height:0;aspect-ratio:4/3}.team-info{padding:28px 24px 32px}.team-link{margin-top:24px}}
-  @media(prefers-reduced-motion:reduce){.team-card,.team-photo{transition:none}.founder-accent{animation:none}}
+  .team-link{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    margin-top:28px;
+    padding:10px 14px;
+    border:1px solid var(--line-strong);
+    color:var(--dim);
+    font:10px 'IBM Plex Mono',monospace;
+    letter-spacing:.07em;
+    text-transform:uppercase;
+    transition:color .2s ease,border-color .2s ease,background .2s ease;
+  }
+  .team-link:hover{color:var(--yellow);border-color:var(--yellow);background:rgba(244,211,94,.04)}
+  @media(max-width:760px){
+    .team-grid{margin-top:28px}
+    .team-card{grid-template-columns:1fr}
+    .team-photo-wrap{min-height:0;height:auto;aspect-ratio:4/3}
+    .team-photo{object-position:center 32%}
+    .team-info{padding:28px 24px 32px}
+    .team-link{margin-top:24px}
+  }
+  @media(prefers-reduced-motion:reduce){
+    .team-card,.team-photo{transition:none}
+    .founder-accent{animation:none}
+  }
+
   /* ---------- VISION ---------- */
   .vision-grid{
     display:grid;
